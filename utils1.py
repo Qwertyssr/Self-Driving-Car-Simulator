@@ -12,12 +12,8 @@ def getName(filePath):
     return filePath.split('/')[-1];
 def importDataInfo(path):
     columns=['Center','Left','Right','Steering','Throttle','Brake','Speed']
-    #print(os.path.join(path,'driving_log.csv'))
     data=pd.read_csv(os.path.join(path,'driving_log.csv'),names = columns)
-    #print(data.head())
-    #print(data['Center'][0])
     data['Center']=data['Center'].apply(getName);
-    #print(data.head())
     print("Total images imported:",data.shape[0])
     return data
     
@@ -49,10 +45,8 @@ def loadData(path,data):
     steering=[]
     for i in range(len(data)):
         indexedData=data.iloc[i];
-        #print(indexedData)
         imagesPath.append(os.path.join(path,'IMG',indexedData.iloc[0]))
         steering.append(float(indexedData.iloc[3]))
-        #print(os.path.join(path,'IMG',indexedData.iloc[0]));
     imagesPath=np.asarray(imagesPath);
     steering=np.asarray(steering);
     return imagesPath,steering;
